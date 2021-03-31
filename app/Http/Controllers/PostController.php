@@ -84,6 +84,11 @@ public function destroy(Post $post){
     Session::flash('message', 'Post was deleted');
     return back();
 }
+
+public function edit(Post $post)
+{
+    return view('admin.posts.edit', ['post' => $post]);
+}
 }
 
 
