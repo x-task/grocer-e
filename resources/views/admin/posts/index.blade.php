@@ -5,7 +5,9 @@
         <div  class="alert alert-danger">{{Session::get('message')}}</div>
     @elseif (session('post-created-message'))
     <div class="alert alert-success">{{session('post-created-message')}}</div>
-        @endif
+    @elseif (session('post-updated-message'))
+    <div class="alert alert-success">{{session('post-updated-message')}}</div>
+    @endif
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -41,8 +43,6 @@
               </tfoot>
               <tbody>
               @foreach ($posts as $post )
-
-
                 <tr>
                     <td>{{$post->id}}</td>
                     <td>{{$post->user->name}}</td>
@@ -51,12 +51,16 @@
                     <td>{{$post->created_at->diffForHumans()}}</td>
                     <td>{{$post->updated_at->diffForHumans()}}</td>
                     <td>
+                        @can('view', $post)     {{-- @can is like an if statment with paraneters
+                            fisrt is method view from PostPolicy.php, second the model var --}}
+
                         <form method="post" action="{{route('post.destroy', $post->id)}}" enctype="multipart/form-data">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                         </td>
+                        @endcan
 
                 </tr>
 

@@ -26,8 +26,7 @@
                         class="form-control"
                         id="body"
                         cols="30"
-                        rows="10" >
-           </textarea>
+                        rows="10" ></textarea>
 
            <button type="submit"
                    class="btn btn-primary">Submit</button>

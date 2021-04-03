@@ -17,19 +17,20 @@ protected $guarded = [];
         return $this->belongsTo(User::class);
     }
 
-public function setPostImageAttribute($value){
+public function setPostImageAttribute($value)
+{
 
     $this->attributes['post_image'] = asset($value);
 
 }
 
-public function getPostImageAttribute($value){
-    if (strpos($value, 'https://') !== FALSE || strpos($value, 'http://') !== FALSE) {
+public function getPostImageAttribute($value)
+{
+    if (strpos($value, 'https://') !== false || strpos($value, 'http://') !== false) {
         return $value;
     }
 
     return asset('images/' . $value);
-
 }
 
 }
