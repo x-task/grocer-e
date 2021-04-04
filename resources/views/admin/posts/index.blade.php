@@ -46,7 +46,7 @@
                 <tr>
                     <td>{{$post->id}}</td>
                     <td>{{$post->user->name}}</td>
-                    <td><a href="{{ route('post.edit',$post->id) }}">{{ $post->title }}</a></td>
+                    <td><a href="{{ route('post.edit', $post->id) }}">{{ $post->title }}</a></td>
                     <td><div><img height="100px" src="{{$post->post_image}}" alt=""></div></td>
                     <td>{{$post->created_at->diffForHumans()}}</td>
                     <td>{{$post->updated_at->diffForHumans()}}</td>
@@ -59,9 +59,8 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
-                        </td>
                         @endcan
-
+                    </td>
                 </tr>
 
 

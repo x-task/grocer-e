@@ -42,7 +42,9 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->is($user);    // Checks if the authenticated user is creating this post
+        /* This is reflected in the PostController.php methods
+        with the use of authorize('create', Model::class) helper function */
     }
 
     /**

@@ -45,6 +45,8 @@ class PostController extends Controller
 
     public function create(){
 
+        $this->authorize('create', Post::class); /* Checks if the authenticated user
+        is creating the post */
         return view('admin.posts.create');
     }
 
@@ -66,6 +68,9 @@ class PostController extends Controller
 //     }
 public function store(){
 
+    $this->authorize('create', Post::class);    /* Checks if the authenticated user
+    created the post and stores it, if true */
+
     $input = request()->validate([
       'title' => 'required|min:8|max:255',
        'post_image'=>'file',
@@ -85,6 +90,7 @@ public function store(){
 
 
 public function destroy(Post $post){
+    $this->authorize('destroy', $post);
     $post->delete();
     Session::flash('message', 'Post was deleted');
     return back();
