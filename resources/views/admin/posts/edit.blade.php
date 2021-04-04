@@ -32,7 +32,7 @@
                         rows="10" >{{ $post->body }}</textarea>
 
            <button type="submit"
-                   class="btn btn-primary">Submit</button>
+                   class="btn btn-primary">Edit</button>
 
         </form>
 

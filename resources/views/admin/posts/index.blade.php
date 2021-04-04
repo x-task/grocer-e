@@ -53,7 +53,6 @@
                     <td>
                         @can('view', $post)     {{-- @can is like an if statment with paraneters
                             fisrt is method view from PostPolicy.php, second the model var --}}
-
                         <form method="post" action="{{route('post.destroy', $post->id)}}" enctype="multipart/form-data">
                             @csrf
                             @method('DELETE')
@@ -74,7 +73,10 @@
       </div>
 
     </div>
-
+{{--  {{ $posts->links('pagination::bootstrap-4') }}  Becaous of Bootstrap 4  --}}
+<div class="pagination justify-content-center">
+    {{ $posts->links() }}
+</div>
 @endsection
 
 @section('scripts')
@@ -85,7 +87,7 @@
 <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
 <!-- Page level custom scripts -->
-<script src="{{asset('js/demo/datatables-demo.js')}}"></script>
+{{--  <script src="{{asset('js/demo/datatables-demo.js')}}"></script>  --}}
 
 @endsection
 

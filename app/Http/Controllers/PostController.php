@@ -22,9 +22,12 @@ class PostController extends Controller
 
     public function index()
     {
-
+        // Show ONLY posts from authorized user
         $posts = auth()->user()->posts;
-        $posts = Post::all();
+        // $posts = Post::all();
+
+        // To display pagination
+        $posts = auth()->user()->posts()->paginate(2);
 
         foreach($posts as $post)
         {
@@ -35,12 +38,10 @@ class PostController extends Controller
     }
 
 
-    public function show(Post $post){
-
-
+    public function show(Post $post)
+    {
 
         return view('blog-post', ['post'=> $post]);
-
     }
 
     public function create(){
@@ -63,26 +64,28 @@ class PostController extends Controller
 //     }
 //     //dd($request->post_image);
 //     auth()->user()->posts()->create($inputs);
-//     return back();
-
-//     }
+//     return redirect()->route('post.index');
+// }
 public function store(){
 
     $this->authorize('create', Post::class);    /* Checks if the authenticated user
     created the post and stores it, if true */
 
     $input = request()->validate([
-      'title' => 'required|min:8|max:255',
-       'post_image'=>'file',
-        'body' => 'required'
+      'title'      => 'required|min:8|max:255',
+      'post_image' => 'file',
+      'body'       => 'required'
    ]);
 
   if($file = request('post_image')){
 
-       $name = $file->getClientOriginalName();
+        $name = $file->getClientOriginalName();
         $file->move('images', $name);
         $input['post_image'] = $name;
+
+
     }
+
     auth()->user()->posts()->create($input);
     session()->flash('post-created-message', 'Post was Created');
     return redirect()->route('post.index');
@@ -90,9 +93,9 @@ public function store(){
 
 
 public function destroy(Post $post){
-    $this->authorize('destroy', $post);
+    $this->authorize('delete', $post);
     $post->delete();
-    Session::flash('message', 'Post was deleted');
+    Session:: flash('message', 'Post was deleted');
     return back();
 }
 
@@ -105,28 +108,28 @@ public function edit(Post $post)
 
 public function update(Post $post)
     {
+    /* We authorize the update with the native instance $post so the authorizasion
+    can be complete */
+    $this->authorize('update', $post);
+
     $input = request()->validate([
-        'title' => 'required|min:8|max:255',
-         'post_image'=>'file',
-          'body' => 'required'
+        'title'      => 'required|min:8|max:255',
+        'post_image' => 'file',
+        'body'       => 'required'
      ]);
 
      if($file = request('post_image'))
      {
         $name = $file->getClientOriginalName();
         $file->move('images', $name);
-        $input['post_image'] = $name;
-        $post->post_image = $input ['post_image'];
+        $input['post_image']     = $name;
+               $post->post_image = $input ['post_image'];
      }
 
      $post->title = $input['title'];
-     $post->body = $input['body'];
+     $post->body  = $input['body'];
 
      session()->flash('post-updated-message', 'Post was Updated' .$input['title']);
-
-     /* We authorize the update with the native instance $post so the authorizasion
-     can be complete */
-     $this->authorize('update', $post);
 
     // $post->update();    //This is the default update method given by Laravel
      $post->save();     //This updates the post without effecting the ownership

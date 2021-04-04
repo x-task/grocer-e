@@ -10,12 +10,14 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/post/{post}', [App\Http\Controllers\PostController::class, 'show'])->name('post');
 
+/* Middleware that checks if a group of Routes are authorized */
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin', [App\Http\Controllers\AdminsController::class, 'index'])->name('admin.index');
 
     Route::get('/admin/posts', [App\Http\Controllers\PostController::class, 'index'])->name('post.index');
     Route::get('/admin/posts/create', [App\Http\Controllers\PostController::class, 'create'])->name('post.create');
+    Route::get('/admin/posts/{post}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('post.edit');
     Route::post('/admin/posts', [App\Http\Controllers\PostController::class, 'store'])->name('post.store');
 
 
@@ -24,4 +26,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Route with middleware, checks if the user is authenticated to see the post.
-Route::get('/admin/posts/{post}/edit', [App\Http\Controllers\PostController::class, 'edit'])->middleware('can:view,post')->name('post.edit');
+// Route::get('/admin/posts/{post}/edit', [App\Http\Controllers\PostController::class, 'edit'])->middleware('can:view,post')->name('post.edit');

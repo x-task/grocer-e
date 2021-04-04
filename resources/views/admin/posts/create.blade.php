@@ -29,7 +29,7 @@
                         rows="10" ></textarea>
 
            <button type="submit"
-                   class="btn btn-primary">Submit</button>
+                   class="btn btn-primary">Create</button>
 
         </form>
 
