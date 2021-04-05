@@ -60,4 +60,15 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    /* Function that lets only Admins see the Dashboard page */
+    public function userHasRole($role_name)
+    {
+        foreach ($this->roles as $role) {
+            if ($role_name == $role->lable) {
+                return true;
+            }
+            return false;
+        }
+    }
 }
