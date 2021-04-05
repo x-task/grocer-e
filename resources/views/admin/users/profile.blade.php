@@ -13,6 +13,15 @@
                     <div class="from-group">
                         <input type="file">
                     </div>
+                    {{-- Edit user Username --}}
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text"
+                        name="username"
+                        class="form-control"
+                        id="name"
+                        value="{{ $user->username }}">
+                    </div>
                     {{-- Edit user Name --}}
                     <div class="form-group">
                         <label for="name">Name</label>
