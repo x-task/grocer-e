@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username',
+        'avatar',
         'name',
         'email',
         'password',
@@ -47,6 +48,16 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function getAvatarAttribute($value)
+    {
+            if (strpos($value, 'https://') !== false || strpos($value, 'http://') !== false)
+            {
+                return $value;
+            }
+
+        return asset('storage/' . $value);
     }
 
     /* Relationship of posts for Users */

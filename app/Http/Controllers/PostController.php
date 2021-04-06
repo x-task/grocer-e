@@ -123,7 +123,7 @@ public function update(Post $post)
         $name = $file->getClientOriginalName();
         $file->move('images', $name);
         $input['post_image']     = $name;
-               $post->post_image = $input ['post_image'];
+        $post->post_image        = $input ['post_image'];
      }
 
      $post->title = $input['title'];
