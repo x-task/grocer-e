@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminsController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,6 +31,9 @@ Route::middleware(['auth'])->group(function () {
     /* User View profile, Update routes */
     Route::get('admin/users/{user}/profile', [App\Http\Controllers\UserController::class, 'show'])->name('user.profile.show');
     Route::put('admin/users/{user}/update', [App\Http\Controllers\UserController::class, 'update'])->name('user.profile.update');
+
+    /* User Index routes */
+    Route::get('admin/users', [App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 });
 
 // Route with middleware, checks if the user is authenticated to see the post.

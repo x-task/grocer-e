@@ -23,7 +23,7 @@
                     <input type  = "text"
                            name  = "username"
                            class = "form-control"
-                           id    = "name"
+                           id    = "username"
                            value = "{{ $user->username }}">
                         @error('username')
                             <div class = "invalid-feedback d-block">{{ $message }}</div>

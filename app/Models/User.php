@@ -57,7 +57,7 @@ class User extends Authenticatable
                 return $value;
             }
 
-        return asset('storage/' . $value);
+        return asset('images/' . $value);
     }
 
     /* Relationship of posts for Users */

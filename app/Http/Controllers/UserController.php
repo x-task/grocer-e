@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
+    protected function getAvatarAttribute($value)
+    {
+            if (strpos($value, 'https://') !== false || strpos($value, 'http://') !== false)
+            {
+                return $value;
+            }
+
+        return asset('images/' . $value);
+    }
+
     /* Function that shows the user profiles */
     public function show(User $user)
     {
@@ -24,8 +34,11 @@ class UserController extends Controller
             // 'password' => ['min:6', 'max:255', 'confirmed']
         ]);
 
-        if(request('avatar')){
-            $inputs['avatar'] = request('avatar')->store('images');
+        if($file = request('avatar')){
+            $name = $file->getClientOriginalName();
+            $file->move('images', $name);
+            $inputs['avatar'] = $name;
+            // $inputs['avatar'] = request('avatar')->store('images');
         }
 
         $user->update($inputs);
