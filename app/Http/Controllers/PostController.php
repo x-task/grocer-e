@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -8,12 +9,11 @@ use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
-    //
 
-
-    protected function getPostImageAttribute($value)
+    public function getPostImageAttribute($value)
     {
-        if (strpos($value, 'https://') !== false || strpos($value, 'http://') !== false) {
+        if (strpos($value, 'https://') !== false || strpos($value, 'http://') !== false)
+        {
             return $value;
         }
 

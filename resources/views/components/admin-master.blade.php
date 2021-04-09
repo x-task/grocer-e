@@ -58,6 +58,8 @@
       <!-- Nav Item - Pages Collapse Menu -->
       <x-admin-sidebar-posts-links></x-admin-sidebar-posts-links>
 
+      <x-admin-sidebar-users-links></x-admin-sidebar-users-links>
+
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -219,7 +221,7 @@
                   </div>
                   <div>
                     <div class="small text-gray-500">December 2, 2019</div>
-                    Spending Alert: We've noticed unusually high spending for your account.
+                    Spending Alert: We' ve noticed unusually high spending for your account.
                   </div>
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>

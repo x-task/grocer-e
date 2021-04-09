@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-
-    protected function getAvatarAttribute($value)
+    public function getAvatarAttribute($value)
     {
             if (strpos($value, 'https://') !== false || strpos($value, 'http://') !== false)
             {
@@ -16,6 +15,18 @@ class UserController extends Controller
             }
 
         return asset('images/' . $value);
+    }
+
+    public function index()
+    {
+        $users = User::all();
+        $users = auth()->user()->paginate(10);
+
+        foreach($users as $user)
+        {
+            $user->avatar = $this->getAvatarAttribute($user->avatar);
+        }
+        return view('admin.users.index', ['users'=>$users]);
     }
 
     /* Function that shows the user profiles */
@@ -42,6 +53,14 @@ class UserController extends Controller
         }
 
         $user->update($inputs);
+        return back();
+    }
+
+    public function destroy(User $user)
+    {
+        $this->authorize('delete', $user);
+        $post->delete();
+        Session:: flash('message', 'Post was deleted');
         return back();
     }
 }

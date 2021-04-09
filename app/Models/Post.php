@@ -18,14 +18,14 @@ protected $guarded = [];
         return $this->belongsTo(User::class);
     }
 
-public function getPostImageAttribute($value)
-{
-    if (strpos($value, 'https://') !== false || strpos($value, 'http://') !== false)
+    public function getPostImageAttribute($value)
     {
-        return $value;
-    }
+        if (strpos($value, 'https://') !== false || strpos($value, 'http://') !== false)
+        {
+            return $value;
+        }
 
-    return asset('images/' . $value);
-}
+        return asset('images/' . $value);
+    }
 
 }
