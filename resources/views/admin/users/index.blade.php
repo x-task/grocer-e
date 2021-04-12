@@ -1,13 +1,13 @@
 <x-admin-master>
     @section('content')
     <h1>All Users</h1>
-    {{-- @if (Session::has('message'))
+     @if (Session::has('message'))
         <div  class="alert alert-danger">{{Session::get('message')}}</div>
-    @elseif (session('post-created-message'))
+    {{--@elseif (session('post-created-message'))
     <div class="alert alert-success">{{session('post-created-message')}}</div>
     @elseif (session('post-updated-message'))
-    <div class="alert alert-success">{{session('post-updated-message')}}</div>
-    @endif --}}
+    <div class="alert alert-success">{{session('post-updated-message')}}</div> --}}
+    @endif
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -25,33 +25,20 @@
                   <th>Avatar</th>
                   <th>Email</th>
                   <th>Password</th>
-                  <th>Created At</th>
-                  <th>Updated At</th>
+                  <th>Registered</th>
+                  <th>Profile Updated</th>
                   <th>Delete</th>
-
                 </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                    <th>Id</th>
-                    <th>Username</th>
-                    <th>Full Name</th>
-                    <th>Avatar</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
-                    <th>Delete</th>
 
-                </tr>
-              </tfoot>
-              <tbody>
               @foreach ($users as $user )
                 <tr>
                     <td>{{$user->id}}</td>
                     <td>{{$user->username}}</td>
                     <td>{{ $user->name }}</a></td>
-                    <td><div><img height="100px" src="{{$user->avatar}}" alt=""></div></td>
+                    <td><div>
+                        <img height="100px" src="{{$user->avatar}}" alt="">
+                        </div>
+                    </td>
                     <td>{{ $user->email }}</a></td>
                     <td>{{ $user->password }}</a></td>
                     <td>{{$user->created_at->diffForHumans()}}</td>
@@ -82,7 +69,7 @@
 
 {{--  {{ $posts->links('pagination::bootstrap-4') }}  Becaous of Bootstrap 4  --}}
 <div class="pagination justify-content-center">
-    {{ $users->links('pagination::bootstrap-4') }}
+    {{ $users->links() }}
 </div>
 @endsection
 
@@ -94,7 +81,7 @@
 <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
 <!-- Page level custom scripts -->
-{{--  <script src="{{asset('js/demo/datatables-demo.js')}}"></script>  --}}
+<script src="{{asset('js/demo/datatables-demo.js')}}"></script>
 
 @endsection
 

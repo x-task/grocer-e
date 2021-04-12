@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        //DB::statement('SET FOREIGN_KEY_CHECKS=0');
         //DB::table('users')->truncate();
         //DB::table('posts')->truncate();
 
@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
         //Post::factory(10)->create();
 
 
-     User::factory(10)->create()->each(function($user){ //Δημιουργούμε 10 users με αντιστοιχα 10 posts
-        $user->posts()->save(Post::factory()->make());
+     User::factory(100)->create()->each(function($user){ //Δημιουργούμε n users με αντιστοιχα 10 posts
+        $user->posts()->save(Post::factory()->make());  // User::factory(n)->create()->each(function($user)
      });
     }
 }

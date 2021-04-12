@@ -33,9 +33,13 @@ Route::middleware(['auth'])->group(function () {
     Route::put('admin/users/{user}/update', [UserController::class, 'update'])->name('user.profile.update');
 
     /* User Index routes */
-    Route::get('admin/users', [UserController::class, 'index'])->name('users.index');
+
     Route::delete('/admin/users/{user}/destroy', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
+/* Only User with Role of Admin can view this page */
+Route::middleware('role:Admin')->group(function () {
+    Route::get('admin/users', [UserController::class, 'index'])->name('users.index');
+});
 // Route with middleware, checks if the user is authenticated to see the post.
 // Route::get('/admin/posts/{post}/edit', [App\Http\Controllers\PostController::class, 'edit'])->middleware('can:view,post')->name('post.edit');
