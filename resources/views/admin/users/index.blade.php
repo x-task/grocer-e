@@ -34,13 +34,13 @@
                 <tr>
                     <td>{{$user->id}}</td>
                     <td>{{$user->username}}</td>
-                    <td>{{ $user->name }}</a></td>
+                    <td><a href="{{ route('user.profile.show', $user->id) }}">{{ $user->name }}</a></td>
                     <td><div>
                         <img height="100px" src="{{$user->avatar}}" alt="">
                         </div>
                     </td>
-                    <td>{{ $user->email }}</a></td>
-                    <td>{{ $user->password }}</a></td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->password }}</td>
                     <td>{{$user->created_at->diffForHumans()}}</td>
                     <td>{{$user->updated_at->diffForHumans()}}</td>
                     <td>

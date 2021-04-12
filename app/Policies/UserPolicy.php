@@ -25,12 +25,14 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \\App\Models\Role  $role
+     * @param  \\App\Models\Role  $model
      * @return mixed
      */
-    public function view(User $user, Role  $role)
+    public function view(User $user, User  $model)
     {
-        //
+        /* Policy so Admin and Auth User can view the Auth Users Profile
+        The ?: opperator acts like an if statment */
+        return $user->userHasRole('Admin') ?: $user->id == $model->id;
     }
 
     /**
@@ -48,10 +50,10 @@ class UserPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Role  $model
      * @return mixed
      */
-    public function update(User $user, Role  $role)
+    public function update(User $user, User  $model)
     {
         //
     }
@@ -60,22 +62,22 @@ class UserPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Role  $model
      * @return mixed
      */
-    public function delete(User $user, Role $role)
+    public function delete(User $user, User $role)
     {
-        return $user->id == $role->id;
+        //
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Role  $model
      * @return mixed
      */
-    public function restore(User $user, Role  $role)
+    public function restore(User $user, User  $model)
     {
         //
     }
@@ -84,10 +86,10 @@ class UserPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\Role  $model
      * @return mixed
      */
-    public function forceDelete(User $user, Role  $role)
+    public function forceDelete(User $user, User  $model)
     {
         //
     }
