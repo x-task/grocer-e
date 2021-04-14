@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -32,16 +33,19 @@ class UserController extends Controller
     /* Function that shows the user profiles */
     public function show(User $user)
     {
-        return view('admin.users.profile', ['user'=>$user]);
+        return view('admin.users.profile', [
+            'user'  => $user,
+            'roles' => Role::all(),
+            ]);
     }
 
     public function update(User $user)
     {
         $inputs = request()->validate([
             'username' => ['required', 'string', 'max:255', 'alpha_dash'],
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'max:255'],
-            'avatar' => ['file'],
+            'name'     => ['required', 'string', 'max:255'],
+            'email'    => ['required', 'string', 'max:255'],
+            'avatar'   => ['file'],
             // 'password' => ['min:6', 'max:255', 'confirmed']
         ]);
 
@@ -61,6 +65,27 @@ class UserController extends Controller
         // $this->authorize('delete', $user);
         $user->delete();
         session()->flash('message', 'User was deleted');
+        return back();
+    }
+
+    public function attach(User $user)
+    {
+        /* To test our vars and if they get the data we want we can use dd() function */
+        // dd(request('role'));
+
+        /* We get the user, then use the function roles(), then use the attach() fun
+        to get the role from the helper function request(with of key: 'role') to
+        attach the role from the user */
+        $user->roles()->attach(request('role'));
+        return back();
+    }
+
+    public function detach(User $user)
+    {
+        /* We get the user, then use the function roles(), then use the detach() fun
+        to get the role from the helper function request(with of key: 'role') to
+        detach the role from the user */
+        $user->roles()->detach(request('role'));
         return back();
     }
 }

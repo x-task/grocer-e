@@ -2,21 +2,21 @@
     @section('content')
     <h1>All Posts</h1>
     @if (Session::has('message'))
-        <div  class="alert alert-danger">{{Session::get('message')}}</div>
+        <div class = "alert alert-danger">{{ Session::get('message') }}</div>
     @elseif (session('post-created-message'))
-    <div class="alert alert-success">{{session('post-created-message')}}</div>
+        <div class = "alert alert-success">{{ session('post-created-message') }}</div>
     @elseif (session('post-updated-message'))
-    <div class="alert alert-success">{{session('post-updated-message')}}</div>
+        <div class = "alert alert-success">{{ session('post-updated-message') }}</div>
     @endif
 
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    <!-- Posts Table -->
+    <div class = "card shadow mb-4">
+    <div class = "card-header py-3">
+    <h6  class = "m-0 font-weight-bold text-primary">{{ "User's Posts" }}</h6>
         </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <div   class = "card-body">
+        <div   class = "table-responsive">
+        <table class = "table table-bordered" id = "dataTable" width = "100%" cellspacing = "0">
               <thead>
                 <tr>
                   <th>Id</th>
@@ -46,17 +46,17 @@
                 <tr>
                     <td>{{$post->id}}</td>
                     <td>{{$post->user->name}}</td>
-                    <td><a href="{{ route('post.edit', $post->id) }}">{{ $post->title }}</a></td>
-                    <td><div><img height="100px" src="{{$post->post_image}}" alt=""></div></td>
+                    <td><a        href   = "{{ route('post.edit', $post->id) }}">{{ $post->title }}</a></td>
+                    <td><div><img height = "100px" src = "{{$post->post_image}}" alt = ""></div></td>
                     <td>{{$post->created_at->diffForHumans()}}</td>
                     <td>{{$post->updated_at->diffForHumans()}}</td>
                     <td>
-                        @can('view', $post)     {{-- @can is like an if statment with paraneters
-                            fisrt is method view from PostPolicy.php, second the model var --}}
-                        <form method="post" action="{{route('post.destroy', $post->id)}}" enctype="multipart/form-data">
+                        @can('view', $post)   {{-- @can is like an if statment with paraneters
+                        fisrt is method view from PostPolicy.php, second the model var --}}
+                        <form method = "post" action = "{{route('post.destroy', $post->id)}}" enctype = "multipart/form-data">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type = "submit" class = "btn btn-danger">Delete</button>
                         </form>
                         @endcan
                     </td>
@@ -74,7 +74,7 @@
 
     </div>
 {{--  {{ $posts->links('pagination::bootstrap-4') }}  Becaous of Bootstrap 4  --}}
-<div class="pagination justify-content-center">
+<div class = "pagination justify-content-center">
     {{ $posts->links() }}
 </div>
 @endsection
@@ -83,8 +83,8 @@
 
 <!-- Page level plugins -->
 
-<script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+<script src = "{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
+<script src = "{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
 <!-- Page level custom scripts -->
 {{--  <script src="{{asset('js/demo/datatables-demo.js')}}"></script>  --}}

@@ -9,10 +9,10 @@
     <div class="alert alert-success">{{session('post-updated-message')}}</div> --}}
     @endif
 
-    <!-- DataTales Example -->
+    <!-- Users Table -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+          <h6 class="m-0 font-weight-bold text-primary">All Users</h6>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -44,14 +44,14 @@
                     <td>{{$user->created_at->diffForHumans()}}</td>
                     <td>{{$user->updated_at->diffForHumans()}}</td>
                     <td>
-                        {{-- @can('view', $user)     {{-- @can is like an if statment with paraneters --}}
-                            {{-- fisrt is method view from PostPolicy.php, second the model var --}}
+                        @can('view', $user)  {{-- @can is like an if statment with paraneters --}}
+                        {{-- fisrt is method view from PostPolicy.php, second the model var --}}
                         <form method="post" action="{{route('user.destroy', $user->id)}}" enctype="multipart/form-data">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
-                        {{-- @endcan --}}
+                        @endcan
                     </td>
                 </tr>
 
