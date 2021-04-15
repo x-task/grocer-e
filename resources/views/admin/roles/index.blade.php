@@ -1,5 +1,11 @@
 <x-admin-master>
     @section('content')
+    {{--  Deleted Message  --}}
+    @if (session()->has('role-deleted'))
+    <div class="alert alert-danger">
+        {{ session('role-deleted') }}
+    </div>
+    @endif
         <div class="row">
             {{--  Creates Role  --}}
             <div class="col-sm-3">
@@ -10,6 +16,7 @@
                         <input type="text" name="label" id="label"
                         class="form-control @error('label') is-invalid @enderror">
                         <div>
+                            {{--  Error message  --}}
                             @error('label')
                                 <span><strong>{{ $message }}</strong></span>
                             @enderror
@@ -31,6 +38,7 @@
                               <th>Id</th>
                               <th>Label</th>
                               <th>Slug</th>
+                              <th>Delete</th>
                             </tr>
                             {{--  For the for loop to know the $roles we include
                                 them in the index() at the RoleController --}}
@@ -39,6 +47,13 @@
                                 <td>{{ $role->id }}</td>
                                 <td>{{ $role->label }}</td>
                                 <td>{{ $role->slug }}</td>
+                                <td>
+                                    <form method="post" action="{{ route('roles.destroy', $role->id) }}">
+                                        @csrf
+                                        @method("DELETE")
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                            @endforeach
                           </tbody>

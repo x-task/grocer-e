@@ -30,4 +30,12 @@ class RoleController extends Controller
         ]);
         return back();
     }
+
+    public function destroy(Role $role)
+    {
+        $role->delete();
+        /* Flash message for deleting, works with the session() in the index view */
+        session()->flash('role-deleted', 'Deleted Role'. $role->label);
+        return back();
+    }
 }
