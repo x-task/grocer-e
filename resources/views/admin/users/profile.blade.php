@@ -97,7 +97,8 @@
                     <tbody>
                         @foreach ($roles as $role)
                             <tr>
-                                <td><input type = "checkbox"
+                                <td>
+                                    <input type = "checkbox"
                                     {{-- We create a for loop to get the user roles and put them
                                         in a var of $user_role --}}
                                     @foreach ($user->roles as $user_role)
@@ -106,7 +107,8 @@
                                         @if ($user_role->slug == $role->slug)
                                             checked
                                         @endif
-                                    @endforeach></td>
+                                    @endforeach>
+                                </td>
                                 <td>{{ $role->id }}</td>
                                 <td>{{ $role->label }}</td>
                                 <td>{{ $role->slug }}</td>
@@ -132,7 +134,7 @@
                                         <button type="submit" class = "btn btn-danger"
                                         {{-- If the User roles(table in DB) contains this role,
                                             disable this button --}}
-                                            @if (!$user->roles->contains($role))
+                                        @if (!$user->roles->contains($role))
                                             disabled
                                         @endif>Detach</button>
                                     </form>

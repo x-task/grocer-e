@@ -40,8 +40,10 @@
                               <th>Slug</th>
                               <th>Delete</th>
                             </tr>
+                        </thead>
                             {{--  For the for loop to know the $roles we include
                                 them in the index() at the RoleController --}}
+                        <tbody>
                           @foreach ($roles as $role )
                             <tr>
                                 <td>{{ $role->id }}</td>
