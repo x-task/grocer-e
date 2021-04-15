@@ -1,11 +1,11 @@
 <x-admin-master>
     @section('content')
-    {{--  Deleted Message  --}}
-    @if (session()->has('role-deleted'))
-    <div class="alert alert-danger">
-        {{ session('role-deleted') }}
-    </div>
-    @endif
+        {{--  Deleted Message  --}}
+        @if (session()->has('role-deleted'))
+        <div class="alert alert-danger">
+            {{ session('role-deleted') }}
+        </div>
+        @endif
         <div class="row">
             {{--  Creates Role  --}}
             <div class="col-sm-3">
@@ -45,7 +45,9 @@
                           @foreach ($roles as $role )
                             <tr>
                                 <td>{{ $role->id }}</td>
-                                <td>{{ $role->label }}</td>
+                                <td>
+                                    <a href="{{ route('roles.edit', $role->id) }}">{{ $role->label }}</a>
+                                </td>
                                 <td>{{ $role->slug }}</td>
                                 <td>
                                     <form method="post" action="{{ route('roles.destroy', $role->id) }}">
