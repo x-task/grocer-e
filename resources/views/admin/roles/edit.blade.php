@@ -37,6 +37,8 @@
                                 <th>Id</th>
                                 <th>Label</th>
                                 <th>Slug</th>
+                                <th>Attach</th>
+                                <th>Detach</th>
                                 </tr>
                             </thead>
 
@@ -58,6 +60,32 @@
                                     <td>{{ $permission->id }}</td>
                                     <td>{{ $permission->label }}</td>
                                     <td>{{ $permission->slug }}</td>
+                                    <td>
+                                        <form action="{{ route('role.permission.attach', $role) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="permission" value="{{ $permission->id }}">
+                                            <button type="submit" class = "btn btn-primary"
+                                            {{-- If the Role permissions (table in DB) contains this permission,
+                                                disable this button --}}
+                                            @if ($role->permissions->contains($permission))
+                                                disabled
+                                            @endif>Attach</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('role.permission.detach', $role) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="permission" value="{{ $permission->id }}">
+                                            <button type="submit" class = "btn btn-danger"
+                                            {{-- If the Role permissions(table in DB) contains this permission,
+                                                disable this button --}}
+                                            @if (!$role->permissions->contains($permission))
+                                                disabled
+                                            @endif>Detach</button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

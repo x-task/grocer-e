@@ -60,6 +60,21 @@ class RoleController extends Controller
         return back();
     }
 
+    /* Attach the selected Permission method */
+    public function attachPermission(Role $role)
+    {
+        $role->permissions()->attach(request('permission'));
+        return back();
+    }
+
+    /* Detach the selected Permission method */
+    public function detachPermission(Role $role)
+    {
+        $role->permissions()->detach(request('permission'));
+        return back();
+    }
+
+    // Delete method
     public function destroy(Role $role)
     {
         $role->delete();
