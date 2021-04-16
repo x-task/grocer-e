@@ -9,7 +9,7 @@
         <div class="row">
             {{--  Creates Role  --}}
             <div class="col-sm-3">
-                <form method="post" action="">
+                <form method="post" action="{{ route('roles.store') }}">
                     @csrf
                     <div class="form-group">
                         <label for="label">Label</label>
